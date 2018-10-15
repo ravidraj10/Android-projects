@@ -1,0 +1,22 @@
+public class MainActivity extends AppCompatActivity {
+WebView wv;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        wv=(WebView)findViewById((R.id.webView));
+        wv.loadUrl("https://www.gmail.com");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+............................
+
+
+
+ <WebView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/webView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />

@@ -1,0 +1,202 @@
+package com.example.ravids10.myapplication;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
+
+public class my1st extends AppCompatActivity {
+ CharSequence items[]={"Google","Wipro","Hcl","Genpact","Ibm"};
+    boolean status[]={true,false,false,false,false};
+    ProgressDialog pd;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my1st);
+    }
+    public void show(View v)
+    {
+
+        showDialog(4);
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    for (int i = 0; i <= 100; ) {
+                        pd.setProgress(i);
+                        Thread.sleep(1000);
+                        i = i + 10;
+                    }
+                }
+                catch (Exception e)
+                {
+
+                }
+
+            }
+        });
+    }
+
+
+
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+
+            case 1:
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setIcon(R.mipmap.ic_launcher);
+                builder1.setTitle("dialog box");
+                // builder1.setCancelable(false);
+                builder1.setMessage("select 1");
+                builder1.setPositiveButton("accept", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i)
+
+                            {
+                                Toast.makeText(getApplicationContext(), "accept clicked", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                builder1.setNegativeButton("decline", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i)
+
+                            {
+                                Toast.makeText(getApplicationContext(), "decline clicked", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                builder1.setNeutralButton("Skip", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i)
+
+                            {
+                                Toast.makeText(getApplicationContext(), "Skip clicked", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                return builder1.create();
+            case 2:
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setIcon(R.mipmap.ic_launcher);
+                builder2.setTitle("select companies");
+                //builder2.setCancelable(false);
+                builder2.setMultiChoiceItems(items, status, new DialogInterface.OnMultiChoiceClickListener() {
+                    public void onClick(DialogInterface dialog, int which, boolean i) {
+                        CharSequence str = items[which];
+                        String res = i == true ? "checked" : "unchecked";
+                        Toast.makeText(getApplicationContext(), str + " " + res, Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                builder2.setPositiveButton("accept", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i)
+
+                            {
+                                Toast.makeText(getApplicationContext(), "accept clicked", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                builder2.setNegativeButton("decline", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i)
+
+                            {
+                                Toast.makeText(getApplicationContext(), "decline clicked", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                builder2.setNeutralButton("Skip", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i)
+
+                            {
+                                Toast.makeText(getApplicationContext(), "Skip clicked", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                return builder2.create();
+            case 3:
+            AlertDialog.Builder builder3 = new AlertDialog.Builder(this);
+            builder3.setIcon(R.mipmap.ic_launcher);
+            builder3.setTitle("select companies");
+            builder3.setCancelable(false);
+                builder3.setSingleChoiceItems(items, 1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        CharSequence str = items[which];
+                        //String res = i == true ? "checked" : "unchecked";
+                        Toast.makeText(getApplicationContext(), str + " " + "checked", Toast.LENGTH_LONG).show();
+
+
+                    }
+                });
+
+                builder3.setPositiveButton("accept", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i)
+
+                            {
+                                Toast.makeText(getApplicationContext(), "accept clicked", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                builder3.setNegativeButton("decline", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i)
+
+                            {
+                                Toast.makeText(getApplicationContext(), "decline clicked", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                builder3.setNeutralButton("Skip", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i)
+
+                            {
+                                Toast.makeText(getApplicationContext(), "Skip clicked", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                return builder3.create();
+            case 4:
+                ProgressDialog pd=new ProgressDialog(this);
+                pd.setIcon(R.mipmap.ic_launcher);
+                pd.setTitle("Download window");
+                pd.setMessage("Please wait");
+                pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pd.setButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Toast.makeText(getApplicationContext(),"cancelled",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return pd;
+
+        }
+        return super.onCreateDialog(id);
+
+
+    }
+
+}
+
+
+-----------------------------------------------------------------------
+
+
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="click here"
+        android:id="@+id/button"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="141dp"
+        android:onClick="show"/>
+</RelativeLayout>
